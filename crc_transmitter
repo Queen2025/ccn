@@ -16,7 +16,7 @@ int main() {
             encoded[i + j] = encoded[i + j] == crc[j] ? '0' : '1';
         }
         
-        for (; i < encoded.length() && encoded[i] != '1'; i++);
+        for (int i; i < encoded.length() && encoded[i] != '1'; i++);
     }
     cout << "###### Transmitter End ####" << endl;
     cout << "The Input Data = " << msg << endl;
