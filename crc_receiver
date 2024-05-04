@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    string received, crc;
+    cout << "Enter the received data with CRC = ";
+    getline(cin, received);
+    cout << "Enter the Generator Polynomial = ";
+    getline(cin, crc);
+    int n = crc.length();
+    string encoded = received;
+    for (int i = 0; i <= encoded.length() - n; ) {
+        for (int j = 0; j < n; j++) {
+            encoded[i + j] = encoded[i + j] == crc[j] ? '0' : '1';
+        }
+       
+        for (; i < encoded.length() && encoded[i] != '1'; i++);
+    }
+    bool errorDetected = false;
+    for (int i = encoded.length() - n + 1; i < encoded.length(); i++) {
+        if (encoded[i] != '0') {
+            errorDetected = true;
+            break;
+        }
+    }
+    if (!errorDetected) {
+        cout << "No error detected." << endl;
+    } else {
+        cout << "Error detected!" << endl;
+    }
+    return 0;
+}
